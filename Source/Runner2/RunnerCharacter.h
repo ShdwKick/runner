@@ -32,18 +32,14 @@ public:
 	//vars
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-		float DeltaLocationValue = 300.0f;
+	float DeltaLocationValue = 300.0f;
 
 	UPROPERTY()
-		ARunnerPlayerController *PlayerController;
+	ARunnerPlayerController *PlayerController;
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-		bool bIsNeedRoll = false;
-
+	bool bIsNeedRoll = false;
 	
-	
-
-
 	//func
 
 	// UFUNCTION()
@@ -63,4 +59,7 @@ public:
 
 	UFUNCTION()
 		void StopRoll();
+
+	UFUNCTION()
+		void RollDelay();
 };

@@ -4,7 +4,7 @@
 #include "RunnerCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "RunnerPlayerController.h"
-#include "Kismet/KismetMathLibrary.h"
+
 
 // Sets default values
 ARunnerCharacter::ARunnerCharacter()
@@ -40,7 +40,7 @@ void ARunnerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAction("Left",IE_Pressed,this,&ARunnerCharacter::MoveLeft);
 
 	PlayerInputComponent->BindAction("Roll",IE_Pressed,this,&ARunnerCharacter::Roll);
-	PlayerInputComponent->BindAction("Roll",IE_Released,this,&ARunnerCharacter::StopRoll);
+	PlayerInputComponent->BindAction("Roll",IE_Released,this,&ARunnerCharacter::RollDelay);
 
 }
 
@@ -67,6 +67,13 @@ void ARunnerCharacter::Roll()
 
 void ARunnerCharacter::StopRoll()
 {
-	bIsNeedRoll=true;
+	bIsNeedRoll=false;
 }
+
+void ARunnerCharacter::RollDelay()
+{
+	FTimerHandle timerHandle;
+	GetWorldTimerManager().SetTimer(timerHandle,this,&ARunnerCharacter::StopRoll,0.9f,false);
+}
+
 
