@@ -7,13 +7,6 @@
 #include "GameFramework/Character.h"
 #include "RunnerCharacter.generated.h"
 
-UENUM(BlueprintType)
-enum class EDirections : uint8
-{
-	Left UMETA(DisplayName="Left"),
-	Right UMETA(DisplayName="Right")
-};
-
 UCLASS()
 class RUNNER2_API ARunnerCharacter : public ACharacter
 {
@@ -37,31 +30,27 @@ public:
 	
 
 	//vars
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-		FVector TargetLocation;
 
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-		FVector CurrentLocation;
-	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 		float DeltaLocationValue = 300.0f;
+
 	UPROPERTY()
 		ARunnerPlayerController *PlayerController;
+	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 		bool bIsNeedRoll = false;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-		EDirections direction;
 
+	
 	
 
 
 	//func
 
-	UFUNCTION()
-		void MovementTick(float DeltaSeconds);
+	// UFUNCTION()
+	// 	void MovementTick(float DeltaSeconds);
 
 	UFUNCTION()
-		void CharacterMovement(float DeltaSeconds,float DeltaValue);
+		void CharacterMovement(float DeltaValue);
 	
 	UFUNCTION()
 		void MoveRight();

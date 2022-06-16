@@ -25,9 +25,7 @@ void ARunnerCharacter::BeginPlay()
 void ARunnerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	MovementTick(DeltaTime);
-
+	
 }
 
 // Called to bind functionality to input
@@ -46,38 +44,20 @@ void ARunnerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 }
 
-void ARunnerCharacter::MovementTick(float DeltaSeconds)
-{
-	if(!GetMesh()->GetRelativeLocation().Equals(TargetLocation,25))
-	{
-		if(direction==EDirections::Right)
-		{
-			CharacterMovement(DeltaSeconds,DeltaLocationValue);
-		}
-		else if(direction==EDirections::Left)
-		{
-			CharacterMovement(DeltaSeconds,-DeltaLocationValue);
-		}
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(0,15.0f,FColor::Red,TEXT("Incorrect Dirrection -> RunnerCgaracter.cpp"));
-		}
-	}
-}
 
-void ARunnerCharacter::CharacterMovement(float DeltaSeconds,float DeltaValue)
+void ARunnerCharacter::CharacterMovement(float DeltaValue)
 {
-
+	GetMesh()->AddLocalOffset(FVector(DeltaValue,0.0f,0.0f));
 }
 
 void ARunnerCharacter::MoveRight()
 {
-	direction = EDirections::Right;
+	CharacterMovement(-DeltaLocationValue);
 }
 
 void ARunnerCharacter::MoveLeft()
 {
-	direction = EDirections::Left;
+	CharacterMovement(DeltaLocationValue);
 }
 
 void ARunnerCharacter::Roll()
